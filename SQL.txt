@@ -1,0 +1,37 @@
+1.write a query to display the orders placed by customer with phone number 030-0074321
+
+	SELECT * 
+	FROM ORDERS as o With(Nolock)
+	INNER JOIN Customers  as c With(Nolock) 
+	ON o.CustomerID = c.CustomersID and c.CustNum = '132'
+
+4. Write a query to get most expense and least expensive Product list (name and unit price).
+
+SELECT * FROM PROD
+where Price = (select MAX(Price) from PROD)
+UNION ALL
+SELECT * FROM PROD
+where Price = (select MIN(Price) from PROD) and PName not in ('xyz') 
+
+
+9. Write query that determines the customer who has placed the maximum number of orders
+
+	select TOP 1 a.JobTitle , COUNT(a.NationalIDNumber) as cnt 
+	from AdventureWorks2017.HumanResources.Employee as a with(nolock)
+	where a.BusinessEntityID < 200
+	GROUP BY A.JobTitle
+	--having count(a.NationalIDNumber) > 10
+	ORDER BY CNT DESC
+
+10. Display the customerid whose name has substring ‘RA’
+
+	select *
+	from vEmployee_TEST 
+	WHERE FirstName LIKE '%RA%'
+
+
+11. Display the first word of all the company name
+
+
+	select *, SUBSTRING(FirstName,0,2) AS ABC
+	from vEmployee_TEST
